@@ -5,5 +5,8 @@ export default function Home() {
     <div className="w-10/12 mx-auto">
       <AddNewList />
     </div>
+    <div>
+      
+    </div>
   </div>
 }

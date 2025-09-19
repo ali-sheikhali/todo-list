@@ -25,7 +25,7 @@ export default function AddNewList() {
         onClose={() => setOpenBottomSheet(false)}
         height="50%"
       >
-       <NewList />
+        <NewList onClose={() => setOpenBottomSheet(false)} />
       </BottomSheet>
     </div>
   );
