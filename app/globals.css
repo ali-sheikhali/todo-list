@@ -1,6 +1,5 @@
-@import url('../styles/fonts.css');
+@import url("../styles/fonts.css");
 @import "tailwindcss";
-
 
 @theme {
   --color-primary: #101828;
@@ -15,6 +14,5 @@
 }
 
 body {
-  
   font-family: "inter";
 }

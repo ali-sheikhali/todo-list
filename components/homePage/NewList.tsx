@@ -2,8 +2,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { newListSchema } from "@schemas/newListSchema";
 import { z } from "zod";
+import { useListsStore } from "store/listStore";
 
-export default function NewList({onClose}:{onClose: ()=> void}) {
+export default function NewList({ onClose }: { onClose: () => void }) {
+  const addList = useListsStore((state) => state.addList);
   type NewListSchema = z.infer<typeof newListSchema>;
   const {
     register,
@@ -18,18 +20,8 @@ export default function NewList({onClose}:{onClose: ()=> void}) {
   });
 
   const onSubmit = (data: NewListSchema) => {
-
-    const storedLists = JSON.parse(localStorage.getItem("lists") || "[]");
-
-    const newItem = {
-      id: storedLists.length,
-      name: data.newList,
-    };
-
-    const updatedItems = [...storedLists, newItem];
-
-    localStorage.setItem("lists", JSON.stringify(updatedItems));
-    onClose()
+    addList(data.newList);
+    onClose();
     reset();
   };
 
