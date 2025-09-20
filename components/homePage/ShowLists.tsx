@@ -5,6 +5,7 @@ import trashIcon from "public/icons/trash.svg";
 import Image from "next/image";
 import AddNewCard from "./AddNewCard";
 import { useCartStore } from "store/cartStore";
+import Link from "next/link";
 
 export default function ShowLists() {
   const { lists, loadFromStorage, removeList } = useListsStore();
@@ -47,9 +48,11 @@ export default function ShowLists() {
                 {listCarts.length > 0 &&
                   listCarts.map((cart) => (
                     <div key={cart.id}>
+                      <Link href={`/detail/${cart.id}`}>
                       <p className="flex gap-1 py-2 px-3 cursor-pointer bg-gray-800 rounded-md hover:bg-gray-600">
                         {cart.cartName}
                       </p>
+                    </Link>
                     </div>
                   ))}
               </div>
