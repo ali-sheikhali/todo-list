@@ -14,6 +14,8 @@ interface TodoStore {
   loadTodoStorage: () => void;
   getTodoByCartId: (cartId: string) => Todo[];
   doneTodo: (todoId: string) => void;
+  removeTodo: (todoId: string) => void;
+  changeNameTodo: (newText: string, todoId: string) => void;
 }
 
 export const useTOdoSotre = create<TodoStore>((set, get) => ({
@@ -40,6 +42,18 @@ export const useTOdoSotre = create<TodoStore>((set, get) => ({
   doneTodo: (todoId) => {
     const updated = get().todos.map((todo) =>
       todo.id === todoId ? { ...todo, done: !todo.done } : todo
+    );
+    set({ todos: updated });
+    localStorage.setItem("todos", JSON.stringify(updated));
+  },
+  removeTodo: (todoId) => {
+    const updated = get().todos.filter((todo) => todo.id != todoId);
+    set({ todos: updated });
+    localStorage.setItem("todos", JSON.stringify(updated));
+  },
+  changeNameTodo: (newText, todoId) => {
+    const updated = get().todos.map((todo) =>
+      todo.id === todoId ? { ...todo, text: newText } : todo
     );
     set({ todos: updated });
     localStorage.setItem("todos", JSON.stringify(updated));
