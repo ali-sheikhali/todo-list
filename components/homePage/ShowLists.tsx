@@ -28,7 +28,7 @@ export default function ShowLists() {
 
   return (
     <div className="flex items-start gap-5">
-      {lists.length > 0 ? (
+      {lists.length > 0 &&
         lists.map((list) => {
           return (
             <div
@@ -59,10 +59,7 @@ export default function ShowLists() {
               <AddNewCard listId={list.id} />
             </div>
           );
-        })
-      ) : (
-        <p className="text-gray-500 mt-2">please enter new Item</p>
-      )}
+        })}
     </div>
   );
 }
