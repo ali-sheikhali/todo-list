@@ -8,8 +8,13 @@ import tickIcon from "public/icons/tick.svg";
 export default function TodoList({ cartId }: { cartId: string }) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [text, setText] = useState("");
-  const { getTodoByCartId, loadTodoStorage, doneTodo, removeTodo, changeNameTodo } =
-    useTOdoSotre();
+  const {
+    getTodoByCartId,
+    loadTodoStorage,
+    doneTodo,
+    removeTodo,
+    changeNameTodo,
+  } = useTOdoSotre();
 
   useEffect(() => {
     loadTodoStorage();
@@ -29,11 +34,11 @@ export default function TodoList({ cartId }: { cartId: string }) {
       {todoItems.map((todo) => (
         <div
           key={todo.id}
-          className="flex items-center justify-between border-b border-stroke-primary gap-2 py-1"
+          className="flex items-center justify-between border-b border-tertiary gap-2 py-1"
         >
           <div
             className="flex items-center gap-2 accent-primary cursor-pointer"
-            onClick={() => editingId ? null : doneTodo(todo.id)}
+            onClick={() => (editingId ? null : doneTodo(todo.id))}
           >
             {editingId === todo.id ? (
               <input
@@ -45,7 +50,7 @@ export default function TodoList({ cartId }: { cartId: string }) {
             ) : (
               <>
                 <input type="checkbox" checked={todo.done} readOnly />
-                <span className={todo.done ? "line-through text-blue-600" : ""}>
+                <span className={todo.done ? "line-through text-blue-900" : "text-primary"}>
                   {todo.text}
                 </span>
               </>
@@ -60,6 +65,7 @@ export default function TodoList({ cartId }: { cartId: string }) {
                 width={20}
                 height={20}
                 alt="tick-icon"
+                className="cursor-pointer"
               />
             ) : (
               <Image
@@ -71,6 +77,7 @@ export default function TodoList({ cartId }: { cartId: string }) {
                 width={20}
                 height={20}
                 alt="edit-icon"
+                className="cursor-pointer"
               />
             )}
 
@@ -80,6 +87,7 @@ export default function TodoList({ cartId }: { cartId: string }) {
               width={20}
               height={20}
               alt="trash-icon"
+              className="cursor-pointer"
             />
           </div>
         </div>

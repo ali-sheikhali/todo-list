@@ -18,10 +18,10 @@ export default function AddNewToDo({cartId}:{cartId:string}) {
       <input
         type="text"
         placeholder="add todo"
-        className="w-full text-sm px-3 py-2 border border-stroke-primary rounded-md focus:outline-0"
+        className="w-full text-sm px-3 py-2 border border-secondary rounded-md focus:outline-0"
         onChange={(e)=>setText(e.target.value)}
       />
-      <button type="submit" className="bg-blue-800 text-sm rounded-md text-white px-3 py-2">submit</button>
+      <button type="submit" className="bg-primary text-sm rounded-md text-white px-3 py-2 cursor-pointer">submit</button>
     </form>
   );
 }

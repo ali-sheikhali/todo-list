@@ -14,7 +14,7 @@ export default function AddNewList() {
     <div>
       <button
         onClick={handleClick}
-        className="w-[200px] flex gap-2 py-2 px-3 rounded-md bg-gray-300 border border-tertiary cursor-pointer"
+        className="w-[200px] flex gap-2 py-2 px-3 rounded-md bg-stroke-primary border border-tertiary cursor-pointer"
       >
         <Image src={addIcon} width={16} height={16} alt="add-icon" />
         <p>Add new list</p>

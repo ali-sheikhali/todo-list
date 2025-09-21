@@ -39,7 +39,7 @@ export default function AddNewCard({ listId }: { listId: number }) {
       {!openAddNewCard ? (
         <div
           onClick={handleAddNewCard}
-          className="flex gap-1 mt-4 py-2 px-3 cursor-pointer bg-gray-800 rounded-md hover:bg-gray-600"
+          className="flex gap-1 mt-4 py-2 px-3 cursor-pointer bg-tertiary rounded-md hover:bg-gray-600"
         >
           <Image
             src={addIcon}
@@ -48,7 +48,7 @@ export default function AddNewCard({ listId }: { listId: number }) {
             alt="add-icon"
             className="invert brightness-0"
           />
-          <p>add new card</p>
+          <p className="text-stroke-primary">add new card</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-4">
@@ -56,12 +56,12 @@ export default function AddNewCard({ listId }: { listId: number }) {
             type="text"
             placeholder="Enter title"
             value={inputValue}
-            className="w-full h-10 px-3 placeholder:text-sm bg-gray-800 rounded-md focus:outline-0"
+            className="w-full h-10 px-3 placeholder:text-sm bg-tertiary rounded-md focus:outline-0"
             onChange={handleChangeInput}
             autoFocus
           />
           <button
-            className="px-3 py-2 w-fit rounded-md bg-gray-700 text-sm"
+            className="px-3 py-2 w-fit rounded-md bg-secondary text-sm"
             type="submit"
           >
             add cart

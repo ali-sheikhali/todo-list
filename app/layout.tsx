@@ -29,7 +29,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NavBar />
-        {children}
+        <div className="bg-stroke-primary h-[calc(100vh-64px)] w-full">{children}</div>
       </body>
     </html>
   );
