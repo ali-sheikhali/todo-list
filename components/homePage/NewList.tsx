@@ -44,7 +44,7 @@ export default function NewList({ onClose }: { onClose: () => void }) {
       <button
         disabled={isSubmitting}
         type="submit"
-        className="w-full bg-green text-white py-1 rounded-md"
+        className="w-full bg-green text-white py-1 rounded-md cursor-pointer"
       >
         {isSubmitting ? "sending" : "submit"}
       </button>

@@ -4,11 +4,19 @@ import Image from "next/image";
 import addIcon from "public/icons/add-icon.svg";
 import { useState } from "react";
 import NewList from "./NewList";
+import ModalWrapper from "@components/common/ModalWrapper";
+import { useResponsive } from "hooks/useResponsive";
 export default function AddNewList() {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const responsive = useResponsive();
 
   const handleClick = () => {
-    setOpenBottomSheet(true);
+    if (responsive) {
+      setOpenModal(true);
+    } else {
+      setOpenBottomSheet(true);
+    }
   };
   return (
     <div>
@@ -27,6 +35,13 @@ export default function AddNewList() {
       >
         <NewList onClose={() => setOpenBottomSheet(false)} />
       </BottomSheet>
+      <ModalWrapper
+        title="New list"
+        onCloseAction={() => setOpenModal(false)}
+        isOpen={openModal}
+      >
+        <NewList onClose={() => setOpenModal(false)} />
+      </ModalWrapper>
     </div>
   );
 }
