@@ -20,7 +20,7 @@ export default function ShowLists() {
   const handleRemoveList = (id: number) => {
     const listHasCart = getCartsByListId(id);
     if (listHasCart.length > 0) {
-      toast.error("list has item.");
+      toast.error("This list still has items.");
     } else {
       removeList(id);
     }

@@ -14,6 +14,7 @@ interface CartStore {
   getCartsByListId: (listId: number) => Cart[];
   removeCart: (cartId: string) => void;
   changeCartName: (id: string, newName: string) => void;
+  moveCart: (cartId: string, targetListId: number) => void;
 }
 
 export const useCartStore = create<CartStore>((set, get) => ({
@@ -46,6 +47,13 @@ export const useCartStore = create<CartStore>((set, get) => ({
   changeCartName: (id, newName) => {
     const updated = get().carts.map((cart) =>
       cart.id === id ? { ...cart, cartName: newName } : cart
+    );
+    set({ carts: updated });
+    localStorage.setItem("carts", JSON.stringify(updated));
+  },
+    moveCart: (cartId, targetListId) => {
+    const updated = get().carts.map((cart) =>
+      cart.id === cartId ? { ...cart, listId: targetListId } : cart
     );
     set({ carts: updated });
     localStorage.setItem("carts", JSON.stringify(updated));
