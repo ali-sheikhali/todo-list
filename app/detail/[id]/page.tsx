@@ -21,7 +21,7 @@ export default function TodoDetailPage() {
 
 
   return (
-    <div className="w-10/12 mx-auto flex flex-col gap-8 py-5">
+    <div className="w-11/12 lg:w-8/12 xl:w-6/12 mx-auto flex flex-col gap-8 py-5">
       <h3 className="text-primary font-semibold"><strong>Title: </strong> {currentCart?.cartName}</h3>
       <div>
         <AddNewToDo cartId={currentCart?.id as string} />

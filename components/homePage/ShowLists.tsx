@@ -40,7 +40,7 @@ export default function ShowLists() {
                 <span className="font-semibold">{list.name}</span>
                 <button
                   onClick={() => handleRemoveList(list.id)}
-                  className="text-red-500 hover:underline"
+                  className="text-red-500 hover:underline cursor-pointer"
                 >
                   <Image
                     src={trashIcon}
