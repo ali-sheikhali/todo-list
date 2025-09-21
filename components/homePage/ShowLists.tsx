@@ -5,12 +5,12 @@ import trashIcon from "public/icons/trash.svg";
 import Image from "next/image";
 import AddNewCard from "./AddNewCard";
 import { useCartStore } from "store/cartStore";
-import Link from "next/link";
 import toast from "react-hot-toast";
+import CartList from "./CartList";
 
 export default function ShowLists() {
   const { lists, loadFromStorage, removeList } = useListsStore();
-  const { loadStorage, getCartsByListId, removeCart } = useCartStore();
+  const { loadStorage, getCartsByListId } = useCartStore();
 
   useEffect(() => {
     loadFromStorage();
@@ -30,7 +30,6 @@ export default function ShowLists() {
     <div className="flex items-start gap-5">
       {lists.length > 0 ? (
         lists.map((list) => {
-          const listCarts = getCartsByListId(list.id);
           return (
             <div
               key={list.id}
@@ -54,27 +53,7 @@ export default function ShowLists() {
               </div>
 
               {/* ------------------------------ show cards for this specific list ----------------------------- */}
-              <div className="flex flex-col gap-3">
-                {listCarts.length > 0 &&
-                  listCarts.map((cart) => (
-                    <div
-                      className="flex justify-between items-center py-2 px-3 cursor-pointer bg-secondary rounded-md hover:bg-gray-600"
-                      key={cart.id}
-                    >
-                      <Link className="w-8/12 bg-red" href={`/detail/${cart.id}`}>
-                        <p className="flex ">{cart.cartName}</p>
-                      </Link>
-                      <div onClick={() => removeCart(cart.id)}>
-                        <Image
-                          src={trashIcon}
-                          width={20}
-                          height={20}
-                          alt="trashIcon"
-                        />
-                      </div>
-                    </div>
-                  ))}
-              </div>
+              <CartList listId={list.id} />
 
               {/* ------------------------------ add new card ----------------------------- */}
               <AddNewCard listId={list.id} />
