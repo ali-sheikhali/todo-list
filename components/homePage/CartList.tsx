@@ -27,13 +27,11 @@ export default function CartList({ listId }: CartListProps) {
     setText("");
   };
 
-  // Drag start - store cart data
   const handleDragStart = (e: React.DragEvent, cart: any) => {
     e.dataTransfer.setData("cartId", cart.id);
     e.dataTransfer.setData("sourceListId", cart.listId.toString());
   };
 
-  // Allow drop
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragOver(true);
@@ -43,7 +41,6 @@ export default function CartList({ listId }: CartListProps) {
     setIsDragOver(false);
   };
 
-  // Handle drop
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragOver(false);
@@ -51,7 +48,6 @@ export default function CartList({ listId }: CartListProps) {
     const cartId = e.dataTransfer.getData("cartId");
     const sourceListId = parseInt(e.dataTransfer.getData("sourceListId"));
 
-    // Only move if dropping on different list
     if (sourceListId !== listId) {
       moveCart(cartId, listId);
     }
@@ -68,62 +64,70 @@ export default function CartList({ listId }: CartListProps) {
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
-      {listCarts.length > 0 &&
-        listCarts.map((cart) => (
-          <div
-            key={cart.id}
-            draggable={editingId !== cart.id}
-            onDragStart={(e) => handleDragStart(e, cart)}
-            className="flex justify-between items-center py-2 px-3 cursor-move bg-secondary rounded-md hover:bg-gray-600 transition-colors"
-          >
-            {editingId === cart.id ? (
-              <input
-                type="text"
-                value={text}
-                className="w-8/12 text-sm px-2 py-1 border-b border-stroke-primary focus:outline-0"
-                onChange={(e) => setText(e.target.value)}
-              />
-            ) : (
-              <Link className="w-8/12" href={`/detail/${cart.id}`}>
-                <p className="flex">{cart.cartName}</p>
-              </Link>
-            )}
-
-            <div className="flex gap-2">
+      {listCarts.length > 0 ? (
+        <>
+          {listCarts.map((cart) => (
+            <div
+              key={cart.id}
+              draggable={editingId !== cart.id}
+              onDragStart={(e) => handleDragStart(e, cart)}
+              className="flex justify-between items-center py-2 px-3 cursor-move bg-secondary rounded-md hover:bg-gray-600 transition-colors"
+            >
               {editingId === cart.id ? (
-                <Image
-                  onClick={() => handleSubmitText(cart.id)}
-                  src={tickIcon}
-                  width={20}
-                  height={20}
-                  alt="tick-icon"
-                  className="cursor-pointer"
+                <input
+                  type="text"
+                  value={text}
+                  className="w-8/12 text-sm px-2 py-1 border-b border-stroke-primary focus:outline-0"
+                  onChange={(e) => setText(e.target.value)}
                 />
               ) : (
-                <Image
-                  onClick={() => {
-                    setEditingId(cart.id);
-                    setText(cart.cartName);
-                  }}
-                  src={editIcon}
-                  width={20}
-                  height={20}
-                  alt="edit-icon"
-                  className="cursor-pointer"
-                />
+                <Link
+                  className="w-8/12"
+                  href={`/detail/${cart.id}`}
+                >
+                  <p className="flex truncate">{cart.cartName}</p>
+                </Link>
               )}
 
-              <Image
-                onClick={() => removeCart(cart.id)}
-                src={trashIcon}
-                width={20}
-                height={20}
-                alt="trashIcon"
-                className="cursor-pointer"
-              />
+              <div className="flex gap-2">
+                {editingId === cart.id ? (
+                  <Image
+                    onClick={() => handleSubmitText(cart.id)}
+                    src={tickIcon}
+                    width={20}
+                    height={20}
+                    alt="tick-icon"
+                    className="cursor-pointer"
+                  />
+                ) : (
+                  <Image
+                    onClick={() => {
+                      setEditingId(cart.id);
+                      setText(cart.cartName);
+                    }}
+                    src={editIcon}
+                    width={20}
+                    height={20}
+                    alt="edit-icon"
+                    className="cursor-pointer"
+                  />
+                )}
+
+                <Image
+                  onClick={() => removeCart(cart.id)}
+                  src={trashIcon}
+                  width={20}
+                  height={20}
+                  alt="trashIcon"
+                  className="cursor-pointer"
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </>
+      ) : (
+        <div className="flex justify-center items-center mt-3">write new cart</div>
+      )}
     </div>
   );
 }

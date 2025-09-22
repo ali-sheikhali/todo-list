@@ -42,7 +42,7 @@ export default function ModalWrapper({
           <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 mt-10">
             <div
               ref={ref}
-              className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-lg bg-white p-6 shadow-lg"
+              className="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-lg bg-white p-6 shadow-lg"
             >
               <div className="flex items-center justify-between pb-4">
                 <h3 className="text-xl font-bold">{title}</h3>

@@ -33,11 +33,11 @@ export default function ShowLists() {
           return (
             <div
               key={list.id}
-              className="w-[250px] flex flex-col gap-3 justify-between px-3 pt-2 pb-4 border rounded-md mb-2 bg-primary text-stroke-primary"
+              className="w-[250px] md:w-[300px] flex flex-col gap-3 justify-between px-3 pt-2 pb-4 border rounded-md mb-2 bg-primary text-stroke-primary"
             >
               {/* ------------------------------ title of list ----------------------------- */}
               <div className="flex justify-between border-b border-tertiary w-full pl-3 py-1">
-                <span className="font-semibold">{list.name}</span>
+                <span className="font-semibold line-clamp-1">{list.name}</span>
                 <button
                   onClick={() => handleRemoveList(list.id)}
                   className="text-red-500 hover:underline cursor-pointer"

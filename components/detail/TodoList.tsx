@@ -31,67 +31,77 @@ export default function TodoList({ cartId }: { cartId: string }) {
 
   return (
     <div className="mt-4 flex flex-col gap-3">
-      {todoItems.map((todo) => (
-        <div
-          key={todo.id}
-          className="flex items-center justify-between border-b border-tertiary gap-2 py-1"
-        >
+      {todoItems.length > 0 ? (
+        todoItems.map((todo) => (
           <div
-            className="flex items-center gap-2 accent-primary cursor-pointer"
-            onClick={() => (editingId ? null : doneTodo(todo.id))}
+            key={todo.id}
+            className="flex items-center justify-between border-b border-tertiary gap-2 py-1"
           >
-            {editingId === todo.id ? (
-              <input
-                type="text"
-                value={text}
-                className="w-full text-sm px-3 py-1 border-b border-stroke-primary focus:outline-0"
-                onChange={(e) => setText(e.target.value)}
-              />
-            ) : (
-              <>
-                <input type="checkbox" checked={todo.done} readOnly />
-                <span className={todo.done ? "line-through text-blue-900" : "text-primary"}>
-                  {todo.text}
-                </span>
-              </>
-            )}
-          </div>
+            <div
+              className="flex items-center gap-2 accent-primary cursor-pointer"
+              onClick={() => (editingId ? null : doneTodo(todo.id))}
+            >
+              {editingId === todo.id ? (
+                <input
+                  type="text"
+                  value={text}
+                  className="w-full text-sm px-3 py-1 border-b border-stroke-primary focus:outline-0"
+                  onChange={(e) => setText(e.target.value)}
+                />
+              ) : (
+                <>
+                  <input type="checkbox" checked={todo.done} readOnly />
+                  <span
+                    className={
+                      todo.done
+                        ? "line-through text-blue-900"
+                        : "text-primary"
+                    }
+                  >
+                    {todo.text}
+                  </span>
+                </>
+              )}
+            </div>
 
-          <div className="flex items-center gap-2 md:gap-4">
-            {editingId === todo.id ? (
+            <div className="flex items-center gap-2 md:gap-4">
+              {editingId === todo.id ? (
+                <Image
+                  onClick={() => handleSubmitText(todo.id)}
+                  src={tickIcon}
+                  width={20}
+                  height={20}
+                  alt="tick-icon"
+                  className="cursor-pointer"
+                />
+              ) : (
+                <Image
+                  onClick={() => {
+                    setEditingId(todo.id);
+                    setText(todo.text);
+                  }}
+                  src={editIcon}
+                  width={20}
+                  height={20}
+                  alt="edit-icon"
+                  className="cursor-pointer"
+                />
+              )}
+
               <Image
-                onClick={() => handleSubmitText(todo.id)}
-                src={tickIcon}
+                onClick={() => removeTodo(todo.id)}
+                src={trashIcon}
                 width={20}
                 height={20}
-                alt="tick-icon"
+                alt="trash-icon"
                 className="cursor-pointer"
               />
-            ) : (
-              <Image
-                onClick={() => {
-                  setEditingId(todo.id);
-                  setText(todo.text);
-                }}
-                src={editIcon}
-                width={20}
-                height={20}
-                alt="edit-icon"
-                className="cursor-pointer"
-              />
-            )}
-
-            <Image
-              onClick={() => removeTodo(todo.id)}
-              src={trashIcon}
-              width={20}
-              height={20}
-              alt="trash-icon"
-              className="cursor-pointer"
-            />
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <div className="text-center text-gray-500">write new todo</div>
+      )}
     </div>
   );
 }
