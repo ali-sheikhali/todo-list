@@ -36,7 +36,7 @@ export default function ShowLists() {
               className="w-[250px] flex flex-col gap-3 justify-between px-3 pt-2 pb-4 border rounded-md mb-2 bg-primary text-stroke-primary"
             >
               {/* ------------------------------ title of list ----------------------------- */}
-              <div className="flex justify-between w-full pl-3 py-1">
+              <div className="flex justify-between border-b border-tertiary w-full pl-3 py-1">
                 <span className="font-semibold">{list.name}</span>
                 <button
                   onClick={() => handleRemoveList(list.id)}
