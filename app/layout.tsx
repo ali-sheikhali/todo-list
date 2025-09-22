@@ -31,7 +31,7 @@ export default function RootLayout({
       >
          <Toaster position="top-center" />
         <NavBar />
-        <div className="bg-stroke-primary h-[calc(100vh-64px)] w-full">{children}</div>
+        <div className="bg-stroke-primary h-screen w-full">{children}</div>
       </body>
     </html>
   );

@@ -26,13 +26,13 @@ export default function Search() {
   return (
     <div
       ref={ref}
-      className="relative w-full py-1 pl-8 cursor-pointer bg-secondary rounded-md hover:bg-gray-600"
+      className="relative py-1 pl-8 cursor-pointer bg-secondary rounded-md hover:bg-gray-600"
     >
       {/* ----------------------------- search bar -----------------------------  */}
       <input
         placeholder="search..."
         type="text"
-        className="focus:outline-0"
+        className="w-[150px] sm:w-[250px] md:w-[350px] xl:w-[450px] focus:outline-0"
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
       />
@@ -44,7 +44,7 @@ export default function Search() {
         <div className="absolute top-10 left-0 w-full bg-stroke-primary text-primary shadow-lg rounded-md z-10 max-h-60 overflow-y-auto">
           {filteredCarts.length > 0 ? (
             filteredCarts.map((cart: { id: string; cartName: string }) => (
-              <div key={cart.id}>
+              <div className="w-11/12 mx-auto py-2 border-b last:border-0 border-primary" key={cart.id}>
                 <Link href={`/detail/${cart.id}`}>
                   <div
                     onClick={handleClick}
